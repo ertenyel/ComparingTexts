@@ -31,22 +31,22 @@ namespace ComparingTexts
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.TextBoxFirstText = new System.Windows.Forms.RichTextBox();
             this.TextBoxSecondText = new System.Windows.Forms.RichTextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.DataGridViewForResults = new System.Windows.Forms.DataGridView();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.CompareTextsButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripComboBoxSelectModeCompare = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripComboBoxSelectModeCompare = new System.Windows.Forms.ToolStripComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewForResults)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -66,29 +66,6 @@ namespace ComparingTexts
             this.splitContainer1.Size = new System.Drawing.Size(800, 325);
             this.splitContainer1.SplitterDistance = 391;
             this.splitContainer1.TabIndex = 0;
-            // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.DataGridViewForResults);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 350);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 100);
-            this.panel1.TabIndex = 0;
-            // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CompareTextsButton,
-            this.toolStripSeparator1,
-            this.toolStripLabel1,
-            this.toolStripComboBoxSelectModeCompare});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(800, 25);
-            this.toolStrip1.TabIndex = 0;
-            this.toolStrip1.Text = "toolStrip1";
             // 
             // TextBoxFirstText
             // 
@@ -110,6 +87,16 @@ namespace ComparingTexts
             this.TextBoxSecondText.TabIndex = 1;
             this.TextBoxSecondText.Text = "";
             // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.DataGridViewForResults);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 350);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(800, 100);
+            this.panel1.TabIndex = 0;
+            // 
             // DataGridViewForResults
             // 
             this.DataGridViewForResults.AllowUserToAddRows = false;
@@ -124,6 +111,19 @@ namespace ComparingTexts
             this.DataGridViewForResults.Size = new System.Drawing.Size(798, 98);
             this.DataGridViewForResults.TabIndex = 0;
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CompareTextsButton,
+            this.toolStripSeparator1,
+            this.toolStripLabel1,
+            this.toolStripComboBoxSelectModeCompare});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(800, 25);
+            this.toolStrip1.TabIndex = 0;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
             // CompareTextsButton
             // 
             this.CompareTextsButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -132,15 +132,7 @@ namespace ComparingTexts
             this.CompareTextsButton.Name = "CompareTextsButton";
             this.CompareTextsButton.Size = new System.Drawing.Size(103, 22);
             this.CompareTextsButton.Text = "Сравнить тексты";
-            // 
-            // toolStripComboBoxSelectModeCompare
-            // 
-            this.toolStripComboBoxSelectModeCompare.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.toolStripComboBoxSelectModeCompare.Items.AddRange(new object[] {
-            "Косинусное расстояние",
-            "Коэффициент линейной корреляции"});
-            this.toolStripComboBoxSelectModeCompare.Name = "toolStripComboBoxSelectModeCompare";
-            this.toolStripComboBoxSelectModeCompare.Size = new System.Drawing.Size(170, 25);
+            this.CompareTextsButton.Click += new System.EventHandler(this.CompareTextsButton_Click);
             // 
             // toolStripSeparator1
             // 
@@ -152,6 +144,15 @@ namespace ComparingTexts
             this.toolStripLabel1.Name = "toolStripLabel1";
             this.toolStripLabel1.Size = new System.Drawing.Size(209, 22);
             this.toolStripLabel1.Text = "Выберите способ сравнения текстов";
+            // 
+            // toolStripComboBoxSelectModeCompare
+            // 
+            this.toolStripComboBoxSelectModeCompare.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.toolStripComboBoxSelectModeCompare.Items.AddRange(new object[] {
+            "Косинусное расстояние",
+            "Коэффициент линейной корреляции"});
+            this.toolStripComboBoxSelectModeCompare.Name = "toolStripComboBoxSelectModeCompare";
+            this.toolStripComboBoxSelectModeCompare.Size = new System.Drawing.Size(170, 25);
             // 
             // MainForm
             // 
@@ -168,9 +169,9 @@ namespace ComparingTexts
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewForResults)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewForResults)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
