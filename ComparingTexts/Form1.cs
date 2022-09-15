@@ -19,49 +19,77 @@ namespace ComparingTexts
 
         private void CompareTextsButton_Click(object sender, EventArgs e)
         {
-            string[] arrayFirstText = TextBoxFirstText.Lines;
-            string[] arraySecondText = TextBoxSecondText.Lines;
+            InitializeParameters();
+        }
+        private void InitializeParameters()
+        {
+            DataGridViewForResults.Rows.Clear();
+            char[] separators = new char[] { ' ', ',', ':', ';', '-','\"', '(', ')'};
+            char[] separatorsLines = new char[] { '.', '!', '?' };
+            string[] arrayFirstText = TextBoxFirstText.Text.Split(separatorsLines, StringSplitOptions.RemoveEmptyEntries);
+            string[] arraySecondText = TextBoxSecondText.Text.Split(separatorsLines, StringSplitOptions.RemoveEmptyEntries);
+            Dictionary<string, double> CosCollection = new Dictionary<string, double>();
             List<string[]> FirstTextListArrayLines = new List<string[]>();
             List<string[]> SecondTextListArrayLines = new List<string[]>();
             for (int i = 0; i < arrayFirstText.Length; i++)
             {
-                FirstTextListArrayLines.Add(arrayFirstText[i].Split(' '));
+                if (!string.IsNullOrWhiteSpace(arrayFirstText[i]))
+                {
+                    FirstTextListArrayLines.Add(arrayFirstText[i].Split(separators, StringSplitOptions.RemoveEmptyEntries));
+                }
             }
             for (int i = 0; i < arraySecondText.Length; i++)
             {
-                SecondTextListArrayLines.Add(arraySecondText[i].Split(' '));
+                if (!string.IsNullOrWhiteSpace(arraySecondText[i]))
+                {
+                    SecondTextListArrayLines.Add(arraySecondText[i].Split(separators, StringSplitOptions.RemoveEmptyEntries));
+                }
             }
 
             foreach (var FirstItem in FirstTextListArrayLines)
             {
                 foreach (var SecondItem in SecondTextListArrayLines)
                 {
-                    
+                    CosCollection.Add(string.Join(" ", FirstItem) + " || " + string.Join(" ", SecondItem), CosDistanceCompute(FirstItem, SecondItem));
                 }
+            }
+            foreach (var item in CosCollection)
+            {
+                DataGridViewForResults.Rows.Add(item.Key, item.Value);
             }
         }
-        private void CosDistanceCompute(string[] FirstItem, string[] SecondItem)
-        {
-            if (FirstItem.Length > SecondItem.Length)
+        private double CosDistanceCompute(string[] FirstItem, string[] SecondItem)
+        {            
+            int FirstLength = 0;
+            int SecondLength = 0;
+            int DistanceVectors = 0;            
+            Dictionary<string, int> FirstLines = new Dictionary<string, int>();
+            Dictionary<string, int> SecondLines = new Dictionary<string, int>();
+            for (int i = 0; i < FirstItem.Length; i++)
             {
-                int[][] compareTextsResult = new int[FirstItem.Length][];
-                for (int i = 0; i < FirstItem.Length; i++)
+                if (!FirstLines.ContainsKey(FirstItem[i].ToUpper()))
                 {
-                    compareTextsResult[i] = new int[2];
-                    for (int j = 0; j < SecondItem.Length; j++)
-                    {
-                        if (FirstItem[i] == SecondItem[j])
-                        {
-                            compareTextsResult[i][0] = 1;
-                            compareTextsResult[i][1] = 1;
-                        }
-                    }
+                    FirstLines.Add(FirstItem[i].ToUpper(), 1);
+                    FirstLength += 1;
                 }
             }
-            else
+            for (int i = 0; i < SecondItem.Length; i++)
             {
-                int[][] compareTextsResult = new int[SecondItem.Length][];
+                if (!SecondLines.ContainsKey(SecondItem[i].ToUpper()))
+                {
+                    SecondLines.Add(SecondItem[i].ToUpper(), 1);
+                    SecondLength += 1;
+                }
             }
+
+            foreach (var item in FirstLines)
+            {
+                if (SecondLines.ContainsKey(item.Key))
+                {
+                    DistanceVectors += 1;
+                }
+            }
+            return Math.Cos(DistanceVectors / (Math.Sqrt(FirstLength) * Math.Sqrt(SecondLength)));
         }
     }
 }

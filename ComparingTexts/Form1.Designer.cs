@@ -33,27 +33,32 @@ namespace ComparingTexts
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.TextBoxFirstText = new System.Windows.Forms.RichTextBox();
             this.TextBoxSecondText = new System.Windows.Forms.RichTextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.DataGridViewForResults = new System.Windows.Forms.DataGridView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.CompareTextsButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripComboBoxSelectModeCompare = new System.Windows.Forms.ToolStripComboBox();
+            this.CompareTexts = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CosDistance = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewForResults)).BeginInit();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
             // 
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 25);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -63,8 +68,8 @@ namespace ComparingTexts
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.TextBoxSecondText);
-            this.splitContainer1.Size = new System.Drawing.Size(800, 325);
-            this.splitContainer1.SplitterDistance = 391;
+            this.splitContainer1.Size = new System.Drawing.Size(800, 294);
+            this.splitContainer1.SplitterDistance = 379;
             this.splitContainer1.TabIndex = 0;
             // 
             // TextBoxFirstText
@@ -73,7 +78,7 @@ namespace ComparingTexts
             this.TextBoxFirstText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TextBoxFirstText.Location = new System.Drawing.Point(0, 0);
             this.TextBoxFirstText.Name = "TextBoxFirstText";
-            this.TextBoxFirstText.Size = new System.Drawing.Size(389, 323);
+            this.TextBoxFirstText.Size = new System.Drawing.Size(377, 292);
             this.TextBoxFirstText.TabIndex = 0;
             this.TextBoxFirstText.Text = "";
             // 
@@ -83,32 +88,27 @@ namespace ComparingTexts
             this.TextBoxSecondText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TextBoxSecondText.Location = new System.Drawing.Point(0, 0);
             this.TextBoxSecondText.Name = "TextBoxSecondText";
-            this.TextBoxSecondText.Size = new System.Drawing.Size(403, 323);
+            this.TextBoxSecondText.Size = new System.Drawing.Size(415, 292);
             this.TextBoxSecondText.TabIndex = 1;
             this.TextBoxSecondText.Text = "";
-            // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.DataGridViewForResults);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 350);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 100);
-            this.panel1.TabIndex = 0;
             // 
             // DataGridViewForResults
             // 
             this.DataGridViewForResults.AllowUserToAddRows = false;
             this.DataGridViewForResults.AllowUserToDeleteRows = false;
+            this.DataGridViewForResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.DataGridViewForResults.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.DataGridViewForResults.BackgroundColor = System.Drawing.SystemColors.Control;
             this.DataGridViewForResults.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DataGridViewForResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridViewForResults.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CompareTexts,
+            this.CosDistance});
             this.DataGridViewForResults.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DataGridViewForResults.Location = new System.Drawing.Point(0, 0);
             this.DataGridViewForResults.Name = "DataGridViewForResults";
             this.DataGridViewForResults.ReadOnly = true;
-            this.DataGridViewForResults.Size = new System.Drawing.Size(798, 98);
+            this.DataGridViewForResults.Size = new System.Drawing.Size(798, 125);
             this.DataGridViewForResults.TabIndex = 0;
             // 
             // toolStrip1
@@ -154,24 +154,60 @@ namespace ComparingTexts
             this.toolStripComboBoxSelectModeCompare.Name = "toolStripComboBoxSelectModeCompare";
             this.toolStripComboBoxSelectModeCompare.Size = new System.Drawing.Size(170, 25);
             // 
+            // CompareTexts
+            // 
+            this.CompareTexts.HeaderText = "Сравниваемые предложения";
+            this.CompareTexts.Name = "CompareTexts";
+            this.CompareTexts.ReadOnly = true;
+            this.CompareTexts.Width = 164;
+            // 
+            // CosDistance
+            // 
+            this.CosDistance.HeaderText = "Косинусное расстояние";
+            this.CosDistance.Name = "CosDistance";
+            this.CosDistance.ReadOnly = true;
+            this.CosDistance.Width = 141;
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 25);
+            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.splitContainer1);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.DataGridViewForResults);
+            this.splitContainer2.Size = new System.Drawing.Size(800, 425);
+            this.splitContainer2.SplitterDistance = 294;
+            this.splitContainer2.TabIndex = 1;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.splitContainer2);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.panel1);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Сравнение текстов";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewForResults)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -180,7 +216,6 @@ namespace ComparingTexts
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.RichTextBox TextBoxFirstText;
         private System.Windows.Forms.RichTextBox TextBoxSecondText;
@@ -189,6 +224,9 @@ namespace ComparingTexts
         private System.Windows.Forms.ToolStripComboBox toolStripComboBoxSelectModeCompare;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CompareTexts;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CosDistance;
+        private System.Windows.Forms.SplitContainer splitContainer2;
     }
 }
 
