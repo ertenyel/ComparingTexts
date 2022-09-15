@@ -152,7 +152,7 @@ namespace ComparingTexts
             "Косинусное расстояние",
             "Коэффициент линейной корреляции"});
             this.toolStripComboBoxSelectModeCompare.Name = "toolStripComboBoxSelectModeCompare";
-            this.toolStripComboBoxSelectModeCompare.Size = new System.Drawing.Size(170, 25);
+            this.toolStripComboBoxSelectModeCompare.Size = new System.Drawing.Size(300, 25);
             // 
             // CompareTexts
             // 

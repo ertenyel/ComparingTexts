@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using NinjaNye.SearchExtensions.Soundex;
 
 namespace ComparingTexts
 {
@@ -18,13 +13,27 @@ namespace ComparingTexts
         }
 
         private void CompareTextsButton_Click(object sender, EventArgs e)
-        {
-            InitializeParameters();
+        {            
+            if (toolStripComboBoxSelectModeCompare.SelectedIndex == 0)
+            {
+                if (!string.IsNullOrWhiteSpace(TextBoxFirstText.Text) && !string.IsNullOrWhiteSpace(TextBoxSecondText.Text))
+                {
+                    RealizationMethodsCosDistance();
+                }
+            }
+            else if(toolStripComboBoxSelectModeCompare.SelectedIndex == 1)
+            {
+                MessageBox.Show("В будущем сделаю...");
+            }
+            else
+            {
+                MessageBox.Show("Выберите метод сравнения");
+            } 
         }
-        private void InitializeParameters()
+        private void RealizationMethodsCosDistance()
         {
             DataGridViewForResults.Rows.Clear();
-            char[] separators = new char[] { ' ', ',', ':', ';', '-','\"', '(', ')'};
+            char[] separators = new char[] { ' ', ',', ':', ';', '-', '\"', '(', ')' };
             char[] separatorsLines = new char[] { '.', '!', '?' };
             string[] arrayFirstText = TextBoxFirstText.Text.Split(separatorsLines, StringSplitOptions.RemoveEmptyEntries);
             string[] arraySecondText = TextBoxSecondText.Text.Split(separatorsLines, StringSplitOptions.RemoveEmptyEntries);
@@ -46,30 +55,30 @@ namespace ComparingTexts
                 }
             }
 
-            foreach (var FirstItem in FirstTextListArrayLines)
+            foreach (string[] FirstItem in FirstTextListArrayLines)
             {
-                foreach (var SecondItem in SecondTextListArrayLines)
+                foreach (string[] SecondItem in SecondTextListArrayLines)
                 {
                     CosCollection.Add(string.Join(" ", FirstItem) + " || " + string.Join(" ", SecondItem), CosDistanceCompute(FirstItem, SecondItem));
                 }
             }
-            foreach (var item in CosCollection)
+            foreach (KeyValuePair<string, double> item in CosCollection)
             {
                 DataGridViewForResults.Rows.Add(item.Key, item.Value);
             }
         }
         private double CosDistanceCompute(string[] FirstItem, string[] SecondItem)
-        {            
+        {
             int FirstLength = 0;
             int SecondLength = 0;
-            int DistanceVectors = 0;            
+            int DistanceVectors = 0;
             Dictionary<string, int> FirstLines = new Dictionary<string, int>();
             Dictionary<string, int> SecondLines = new Dictionary<string, int>();
             for (int i = 0; i < FirstItem.Length; i++)
             {
                 if (!FirstLines.ContainsKey(FirstItem[i].ToUpper()))
                 {
-                    FirstLines.Add(FirstItem[i].ToUpper(), 1);
+                    FirstLines.Add(SoundexProcessor.ToSoundex(FirstItem[i]).ToUpper(), 1);
                     FirstLength += 1;
                 }
             }
@@ -77,19 +86,19 @@ namespace ComparingTexts
             {
                 if (!SecondLines.ContainsKey(SecondItem[i].ToUpper()))
                 {
-                    SecondLines.Add(SecondItem[i].ToUpper(), 1);
+                    SecondLines.Add(SoundexProcessor.ToSoundex(SecondItem[i]).ToUpper(), 1);
                     SecondLength += 1;
                 }
             }
 
-            foreach (var item in FirstLines)
+            foreach (KeyValuePair<string, int> item in FirstLines)
             {
                 if (SecondLines.ContainsKey(item.Key))
                 {
                     DistanceVectors += 1;
                 }
             }
-            return Math.Cos(DistanceVectors / (Math.Sqrt(FirstLength) * Math.Sqrt(SecondLength)));
+            return DistanceVectors / (Math.Sqrt(FirstLength) * Math.Sqrt(SecondLength));
         }
     }
 }
