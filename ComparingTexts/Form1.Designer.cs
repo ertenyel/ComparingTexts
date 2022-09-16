@@ -46,6 +46,7 @@ namespace ComparingTexts
             this.WordsCompareMetrics = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.CleartextBoxesButton = new System.Windows.Forms.ToolStripButton();
+            this.ButtonTestsText = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -139,6 +140,7 @@ namespace ComparingTexts
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CompareTextsButton,
             this.CleartextBoxesButton,
+            this.ButtonTestsText,
             this.toolStripSeparator1,
             this.toolStripLabel1,
             this.toolStripComboBoxSelectModeCompare,
@@ -235,6 +237,16 @@ namespace ComparingTexts
             this.CleartextBoxesButton.Text = "Очистить поля ввода";
             this.CleartextBoxesButton.Click += new System.EventHandler(this.CleartextBoxesButton_Click);
             // 
+            // ButtonTestsText
+            // 
+            this.ButtonTestsText.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ButtonTestsText.Image = ((System.Drawing.Image)(resources.GetObject("ButtonTestsText.Image")));
+            this.ButtonTestsText.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonTestsText.Name = "ButtonTestsText";
+            this.ButtonTestsText.Size = new System.Drawing.Size(160, 19);
+            this.ButtonTestsText.Text = "Вставить тестовый вариант";
+            this.ButtonTestsText.Click += new System.EventHandler(this.ButtonTestsText_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -279,6 +291,7 @@ namespace ComparingTexts
         private System.Windows.Forms.ToolStripComboBox WordsCompareMetrics;
         private System.Windows.Forms.ToolStripButton CleartextBoxesButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton ButtonTestsText;
     }
 }
 

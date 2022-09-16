@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 using NinjaNye.SearchExtensions.Soundex;
 
@@ -136,9 +137,20 @@ namespace ComparingTexts
                     }
                     else
                     {
+                        int ii = 0;
                         foreach (var item in FirstLines)
                         {
-                            if (LevenshteinDistance(item.Key, FirstItem[i].ToUpper()) > 3)
+                            ii++;
+                            int distance = LevenshteinDistance(item.Key, FirstItem[i].ToUpper());
+                            if (((FirstItem[i].Length > 0 && FirstItem[i].Length < 3) || (item.Key.Length > 0 && item.Key.Length < 3)) && distance == 0)
+                            {
+                                break;
+                            }
+                            if ((FirstItem[i].Length > 2 || item.Key.Length > 2) && distance < 3)
+                            {
+                                break;
+                            }
+                            else if(ii == FirstLines.Count)
                             {
                                 FirstLines.Add(FirstItem[i].ToUpper(), 1);
                                 FirstLength += 1;
@@ -159,9 +171,20 @@ namespace ComparingTexts
                     }
                     else
                     {
+                        int ii = 0;
                         foreach (var item in SecondLines)
                         {
-                            if (LevenshteinDistance(item.Key, SecondItem[i].ToUpper()) > 3)
+                            ii++;
+                            int distance = LevenshteinDistance(item.Key, SecondItem[i].ToUpper());
+                            if (((SecondItem[i].Length > 0 && SecondItem[i].Length < 3) || (item.Key.Length > 0 && item.Key.Length < 3)) && distance == 0)
+                            {
+                                break;
+                            }
+                            if ((SecondItem[i].Length > 2 || item.Key.Length > 2) && distance < 3)
+                            {
+                                break;
+                            }
+                            else if(ii == SecondLines.Count)
                             {
                                 SecondLines.Add(SecondItem[i].ToUpper(), 1);
                                 SecondLength += 1;
@@ -174,12 +197,31 @@ namespace ComparingTexts
 
             foreach (KeyValuePair<string, int> firstItem in FirstLines)
             {
+                int ii = 0;
                 foreach (var secondItem in SecondLines)
                 {
+                    ii++;
+                    int distance = LevenshteinDistance(firstItem.Key, secondItem.Key);
+                    if (((firstItem.Key.Length > 0 && firstItem.Key.Length < 3) || (secondItem.Key.Length > 0 && secondItem.Key.Length < 3)) && distance == 0)
+                    {
+                        DistanceVectors += 1;
+                        break;
+                    }
+                    if ((firstItem.Key.Length > 2 || secondItem.Key.Length > 2) && distance < 3)
+                    {
+                        DistanceVectors += 1;
+                        break;
+                    }
+                    else if (ii == SecondLines.Count)
+                    {
+                        /*DistanceVectors += 1;
+                        break;*/
+                    }
+                    /*
                     if (LevenshteinDistance(firstItem.Key, secondItem.Key) < 3)
                     {
                         DistanceVectors += 1;
-                    }
+                    } */
                 }
             }
             return DistanceVectors / (Math.Sqrt(FirstLength) * Math.Sqrt(SecondLength));
@@ -215,6 +257,12 @@ namespace ComparingTexts
         {
             TextBoxFirstText.Clear();
             TextBoxSecondText.Clear();
+        }
+
+        private void ButtonTestsText_Click(object sender, EventArgs e)
+        {
+            TextBoxFirstText.Text = File.ReadAllText("FirstTestFile.txt");
+            TextBoxSecondText.Text = File.ReadAllText("SecondTestFile.txt");
         }
     }
 }
