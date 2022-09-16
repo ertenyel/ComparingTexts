@@ -34,8 +34,6 @@ namespace ComparingTexts
             this.TextBoxFirstText = new System.Windows.Forms.RichTextBox();
             this.TextBoxSecondText = new System.Windows.Forms.RichTextBox();
             this.DataGridViewForResults = new System.Windows.Forms.DataGridView();
-            this.CompareTexts = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CosDistance = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.CompareTextsButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -47,6 +45,8 @@ namespace ComparingTexts
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.CleartextBoxesButton = new System.Windows.Forms.ToolStripButton();
             this.ButtonTestsText = new System.Windows.Forms.ToolStripButton();
+            this.CompareTexts = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CosDistance = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -105,7 +105,7 @@ namespace ComparingTexts
             // 
             this.DataGridViewForResults.AllowUserToAddRows = false;
             this.DataGridViewForResults.AllowUserToDeleteRows = false;
-            this.DataGridViewForResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.DataGridViewForResults.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DataGridViewForResults.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.DataGridViewForResults.BackgroundColor = System.Drawing.SystemColors.Control;
             this.DataGridViewForResults.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -119,20 +119,6 @@ namespace ComparingTexts
             this.DataGridViewForResults.ReadOnly = true;
             this.DataGridViewForResults.Size = new System.Drawing.Size(1173, 184);
             this.DataGridViewForResults.TabIndex = 0;
-            // 
-            // CompareTexts
-            // 
-            this.CompareTexts.HeaderText = "Сравниваемые предложения";
-            this.CompareTexts.Name = "CompareTexts";
-            this.CompareTexts.ReadOnly = true;
-            this.CompareTexts.Width = 164;
-            // 
-            // CosDistance
-            // 
-            this.CosDistance.HeaderText = "Косинусное расстояние";
-            this.CosDistance.Name = "CosDistance";
-            this.CosDistance.ReadOnly = true;
-            this.CosDistance.Width = 141;
             // 
             // toolStrip1
             // 
@@ -247,6 +233,20 @@ namespace ComparingTexts
             this.ButtonTestsText.Text = "Вставить тестовый вариант";
             this.ButtonTestsText.Click += new System.EventHandler(this.ButtonTestsText_Click);
             // 
+            // CompareTexts
+            // 
+            this.CompareTexts.FillWeight = 149.2386F;
+            this.CompareTexts.HeaderText = "Сравниваемые предложения";
+            this.CompareTexts.Name = "CompareTexts";
+            this.CompareTexts.ReadOnly = true;
+            // 
+            // CosDistance
+            // 
+            this.CosDistance.FillWeight = 50.76142F;
+            this.CosDistance.HeaderText = "Косинусное расстояние";
+            this.CosDistance.Name = "CosDistance";
+            this.CosDistance.ReadOnly = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -284,14 +284,14 @@ namespace ComparingTexts
         private System.Windows.Forms.ToolStripComboBox toolStripComboBoxSelectModeCompare;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CompareTexts;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CosDistance;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private System.Windows.Forms.ToolStripComboBox WordsCompareMetrics;
         private System.Windows.Forms.ToolStripButton CleartextBoxesButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton ButtonTestsText;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CompareTexts;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CosDistance;
     }
 }
 
