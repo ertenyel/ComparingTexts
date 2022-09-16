@@ -20,26 +20,16 @@ namespace ComparingTexts
                 if (toolStripComboBoxSelectModeCompare.SelectedIndex == 0)
                 {
                     if (WordsCompareMetrics.SelectedIndex == 0)
-                    {
                         RealizationMethodsCosDistance(true);
-                    }
                     else if (WordsCompareMetrics.SelectedIndex == 1)
-                    {
                         RealizationMethodsCosDistance(false);
-                    }
                     else
-                    {
                         MessageBox.Show("Выберите метод сравнения для введенного языка");
-                    }
                 }
                 else if (toolStripComboBoxSelectModeCompare.SelectedIndex == 1)
-                {
-                    MessageBox.Show("В будущем сделаю...");
-                }
+                    MessageBox.Show("Надеюсь доделаю этот метод, а пока попробуйте другой...");
                 else
-                {
                     MessageBox.Show("Выберите метод сравнения");
-                }
             } 
         }
         private void RealizationMethodsCosDistance(bool englishLanguage)
@@ -52,33 +42,17 @@ namespace ComparingTexts
             Dictionary<string, double> CosCollection = new Dictionary<string, double>();
             List<string[]> FirstTextListArrayLines = new List<string[]>();
             List<string[]> SecondTextListArrayLines = new List<string[]>();
-            for (int i = 0; i < arrayFirstText.Length; i++)
-            {
-                if (!string.IsNullOrWhiteSpace(arrayFirstText[i]))
-                {
-                    FirstTextListArrayLines.Add(arrayFirstText[i].Split(separators, StringSplitOptions.RemoveEmptyEntries));
-                }
-            }
-            for (int i = 0; i < arraySecondText.Length; i++)
-            {
-                if (!string.IsNullOrWhiteSpace(arraySecondText[i]))
-                {
-                    SecondTextListArrayLines.Add(arraySecondText[i].Split(separators, StringSplitOptions.RemoveEmptyEntries));
-                }
-            }
+            FillTheArrayLines(arrayFirstText, separators, ref FirstTextListArrayLines);
+            FillTheArrayLines(arraySecondText, separators, ref SecondTextListArrayLines);
 
             foreach (string[] FirstItem in FirstTextListArrayLines)
             {
                 foreach (string[] SecondItem in SecondTextListArrayLines)
                 {
                     if (englishLanguage)
-                    {
                         CosCollection.Add(string.Join(" ", FirstItem) + " <<>> " + string.Join(" ", SecondItem), CosDistanceComputeEnglish(FirstItem, SecondItem));
-                    }
                     else
-                    {
                         CosCollection.Add(string.Join(" ", FirstItem) + " <<>> " + string.Join(" ", SecondItem), CosDistanceComputeOtherLanguage(FirstItem, SecondItem));
-                    }
                 }
             }
             double maxValue = 0;
@@ -90,6 +64,14 @@ namespace ComparingTexts
                 DataGridViewForResults.Rows.Add(item.Key, item.Value);
             }
             MessageBox.Show($"Максимальное совпадение: {maxValue}\nОтсортируйте список результатов");
+        }
+        private void FillTheArrayLines(string[] arrayText, char[] separators, ref List<string[]> arrayLines)
+        {
+            for (int i = 0; i < arrayText.Length; i++)
+            {
+                if (!string.IsNullOrWhiteSpace(arrayText[i]))
+                    arrayLines.Add(arrayText[i].Split(separators, StringSplitOptions.RemoveEmptyEntries));
+            }
         }
         private double CosDistanceComputeEnglish(string[] FirstItem, string[] SecondItem)
         {
@@ -135,12 +117,19 @@ namespace ComparingTexts
                 foreach (var secondItem in SecondLines)
                 {                    
                     int distance = LevenshteinDistance(firstItem.Key, secondItem.Key);
+                    /*
                     if (((firstItem.Key.Length > 0 && firstItem.Key.Length < 3) || (secondItem.Key.Length > 0 && secondItem.Key.Length < 3)) && distance == 0)
                     {
                         DistanceVectors += 1;
                         break;
                     }
                     if ((firstItem.Key.Length > 2 || secondItem.Key.Length > 2) && distance < 2)
+                    {
+                        DistanceVectors += 1;
+                        break;
+                    } */
+                    if ((((firstItem.Key.Length > 0 && firstItem.Key.Length < 3) || (secondItem.Key.Length > 0 && secondItem.Key.Length < 3)) && distance == 0) || 
+                        ((firstItem.Key.Length > 2 || secondItem.Key.Length > 2) && distance < 2))
                     {
                         DistanceVectors += 1;
                         break;
@@ -229,8 +218,15 @@ namespace ComparingTexts
 
         private void ButtonTestsText_Click(object sender, EventArgs e)
         {
-            TextBoxFirstText.Text = File.ReadAllText("FirstTestFile.txt");
-            TextBoxSecondText.Text = File.ReadAllText("SecondTestFile.txt");
+            try
+            {
+                TextBoxFirstText.Text = File.ReadAllText("FirstTestFile.txt");
+                TextBoxSecondText.Text = File.ReadAllText("SecondTestFile.txt");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Возникла следующая ошибка при попытке чтения файлов: {ex.Message}");
+            }
         }
         #endregion
     }
